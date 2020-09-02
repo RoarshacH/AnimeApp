@@ -9,15 +9,9 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <style>
         .owl-carousel .item {
-          height: 12rem;
-          background: #4DC7A0;
+          height: 30rem;
           padding: 1rem;
         }
-        .owl-carousel .item h4 {
-          color: #FFF;
-          font-weight: 400;
-          margin-top: 0rem;
-         }
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"/>
@@ -31,13 +25,10 @@
                     <a href=""><i class="fas fa-skull"></i></a>
                 </li>
                 <li class="md:ml-16 mt-1">
-                    <a href="#" class="hover:text-gray-300">Home</a>
+                <a href="{{route('movies.index')}}" class="hover:text-gray-300">Home</a>
                 </li>
                 <li class="md:ml-16 mt-1">
-                    <a href="#"  class="hover:text-gray-300">Movie</a>
-                </li>
-                <li class="md:ml-16 mt-1">
-                    <a href="#"  class="hover:text-gray-300">Tv Series</a>
+                    <a href="{{route('movies.list')}}"  class="hover:text-gray-300">Tv Series</a>
                 </li>
                 <li class="md:ml-16 mt-1">
                     <a href="#"  class="hover:text-gray-300">People</a>

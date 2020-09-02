@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'MovieDB' => [
+        'token' => env('MOVDB_TOKEN'),
+
+    ],
+
 ];

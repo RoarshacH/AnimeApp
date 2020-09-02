@@ -8,47 +8,65 @@
             Current Season
         </h2>
         <div class="owl-carousel owl-theme mt-5">
-            <div class="item"><h4>1</h4></div>
-            <div class="item"><h4>2</h4></div>
-            <div class="item"><h4>3</h4></div>
-            <div class="item"><h4>4</h4></div>
-            <div class="item"><h4>5</h4></div>
-            <div class="item"><h4>6</h4></div>
-            <div class="item"><h4>7</h4></div>
-            <div class="item"><h4>8</h4></div>
-            <div class="item"><h4>9</h4></div>
-            <div class="item"><h4>10</h4></div>
-            <div class="item"><h4>11</h4></div>
-        </div>
-        {{-- @if ()
-            @foreach ($collection as $item)
-                <div class="grid grid-cols-4 gap-16">
-                    <div class="mt-8">
-                        <a href=""> <img src="" alt=""> </a>
+            @foreach ($popularTV as $show)
+            <div class="item">
+                <div class="mt-8">
+                    <a href="{{'Tv/'. $show['id']}}">
+                        <img src={{'https://image.tmdb.org/t/p/w500/'.$show['poster_path']}} alt="The Tv Show Poster">
+                    </a>
+                </div>
+                <div class="mt-2">
+                <a href="" class="text-lg mt-2 hover-text-gray:300"> {{$show['name']}}</a>
+                    <div class="flex items-center text-gray-400 text-sm mt-1">
+                    <span class="ml-1">{{$show['vote_average']}}</span>
+                        <span class="ml2"> | </span>
+                    <span> {{$show['first_air_date']}}</span>
+                    </div>
+                    <div class="text-gray text-sm">
+                        @foreach ($show['genre_ids'] as $item)
+                            {{$genres->get($item)}} @if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
                     </div>
                 </div>
+            </div>
             @endforeach
-        @endif --}}
+        </div>
     </div>
 </div>
 
 <div class="container mx-auto px-4 pt-16">
     <div class="popular-anime">
         <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">
-            Top Anime
+            Popular Tv Series
         </h2>
         <div class="owl-carousel owl-theme mt-5">
-            <div class="item"><h4>1</h4></div>
-            <div class="item"><h4>2</h4></div>
-            <div class="item"><h4>3</h4></div>
-            <div class="item"><h4>4</h4></div>
-            <div class="item"><h4>5</h4></div>
-            <div class="item"><h4>6</h4></div>
-            <div class="item"><h4>7</h4></div>
-            <div class="item"><h4>8</h4></div>
-            <div class="item"><h4>9</h4></div>
-            <div class="item"><h4>10</h4></div>
-            <div class="item"><h4>11</h4></div>
+            @foreach ($topRatedTv as $show)
+            <div class="item">
+                <div class="mt-8">
+                    <a href="{{'Tv/'. $show['id']}}">
+                        <img src={{'https://image.tmdb.org/t/p/w500/'.$show['poster_path']}} alt="The Tv Show Poster">
+                    </a>
+                </div>
+                <div class="mt-2">
+                <a href="" class="text-lg mt-2 hover-text-gray:300"> {{$show['name']}}</a>
+                    <div class="flex items-center text-gray-400 text-sm mt-1">
+                    <span class="ml-1">{{$show['vote_average']}}</span>
+                        <span class="ml2"> | </span>
+                    <span> {{$show['first_air_date']}}</span>
+                    </div>
+                    <div class="text-gray text-sm">
+                        @foreach ($show['genre_ids'] as $item)
+                            {{$genres->get($item)}} @if (!$loop->last)
+                            ,
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
         </div>
     </div>
 </div>
