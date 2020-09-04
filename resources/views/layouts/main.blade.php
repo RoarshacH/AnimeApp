@@ -37,7 +37,7 @@
                     <a href="{{route('movies.list')}}"  class="hover:text-gray-300">Tv Series</a>
                 </li>
                 <li class="md:ml-16 mt-1">
-                    <a href="#"  class="hover:text-gray-300">People</a>
+                    <a href="{{route('people.index')}}"  class="hover:text-gray-300">People</a>
                 </li>
             </ul>
             <div class="flex flex-col md:flex-row items-center md:mt-4 mt-2">
@@ -79,4 +79,5 @@
       })
     })
     </script>
+    @yield('scripts')
 </html>

@@ -90,11 +90,13 @@
                 @foreach ($details['cast'] as $item)
                     <div class="item">
                         <div class="mt-8">
+                            <a href="{{route('people.show', $item['id'])}}">
                             <img src={{'https://image.tmdb.org/t/p/w300/'.$item['profile_path']}} alt="">
                             <div class="mt-2">
                             <a href="" class="text-lg mt-2 hover:text-gray:300">{{$item['name']}}</a>
                                 <div class="text-sm text-gray-400">{{$item['character']}}</div>
                             </div>
+                            </a>
                         </div>
                     </div>
                 @endforeach

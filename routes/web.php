@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MoviesController@index')->name('movies.index');
 Route::get('/Tv/{id}', 'MoviesController@show')->name('movies.show');
+
+Route::get('/people', 'PeoplesController@index')->name('people.index');
+Route::get('/people/page/{page?}', 'PeoplesController@index');
+
+Route::get('/people/{id}', 'PeoplesController@show')->name('people.show');
+
 Route::get('/list', 'MoviesController@list')->name('movies.list');
 
 

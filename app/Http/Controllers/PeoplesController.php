@@ -1,34 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\ViewModels\MoviesViewModel;
-use App\ViewModels\MovieViewModel;
+use Illuminate\Http\Request;
+use App\ViewModels\PeoplesViewModel;
+use App\ViewModels\PersonViewModel;
 
-class MoviesController extends Controller
+class PeoplesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   $suffix = config('services.MovieDB.token');
-        $httpRequest = 'https://api.themoviedb.org/3/tv/top_rated?api_key='.$suffix ;
-        $topRatedTV = Http::get($httpRequest)->json()['results'];
-        $httpRequest = 'https://api.themoviedb.org/3/tv/on_the_air?api_key='.$suffix ;
-        $popularTV =  Http::get($httpRequest)->json()['results'];
-        $httpRequest = 'https://api.themoviedb.org/3/genre/tv/list?api_key='.$suffix ;
-        $genres =  Http::get($httpRequest)->json()['genres'];
+    public function index($page=1)
+    {
+        abort_if($page>500 , 204);
 
-        $viewModel = new MoviesViewModel(
-            $popularTV,
-            $topRatedTV,
-            $genres,
+        $suffix = config('services.MovieDB.token');
+        $httpRequest = 'https://api.themoviedb.org/3/person/popular?api_key='.$suffix."&page=".$page ;
+        $people = Http::get($httpRequest)->json()['results'];
+        // dump($httpRequest);
+        $viewModel = new PeoplesViewModel(
+            $people,
+            $page
         );
-        return view('movies.index', $viewModel);
+        return view('people.index', $viewModel);
     }
 
     /**
@@ -61,16 +58,19 @@ class MoviesController extends Controller
     public function show($id)
     {
         $suffix = config('services.MovieDB.token');
-        $httpRequest = 'https://api.themoviedb.org/3/tv/'.$id.'?api_key='.$suffix.'&append_to_response=credits,videos,images' ;
-        $tvDetails = Http::get($httpRequest)->json();
+        $httpRequest = 'https://api.themoviedb.org/3/person/'.$id.'?api_key='.$suffix ;
+        $actor = Http::get($httpRequest)->json();
 
-        $viewModel = new MovieViewModel(
-            $tvDetails,
+        $httpRequest = 'https://api.themoviedb.org/3/person/'.$id.'/external_ids'.'?api_key='.$suffix ;
+        $social = Http::get($httpRequest)->json();
+
+        $httpRequest = 'https://api.themoviedb.org/3/person/'.$id.'/combined_credits'.'?api_key='.$suffix ;
+        $credits = Http::get($httpRequest)->json();
+
+        $viewModel = new PersonViewModel(
+            $actor, $social, $credits
         );
-
-        return view('movies.show', $viewModel);
-
-        //
+        return view('people.show', $viewModel);
     }
 
     /**

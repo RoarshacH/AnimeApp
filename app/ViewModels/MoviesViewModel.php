@@ -32,10 +32,6 @@ class MoviesViewModel extends ViewModel
     }
 
     private function formatMovies($tvShow){
-        // @foreach ($show['genre_ids'] as $item)
-        //                     {{$genres->get($item)}} @if (!$loop->last)
-        //                         ,
-
         return collect($tvShow)->map(function($show){
             $genreFormatted = collect($show['genre_ids'])->mapWithKeys(function($value){
                 return [$value=> $this->genres()->get($value)];
