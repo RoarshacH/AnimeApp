@@ -12,7 +12,7 @@
             <div class="item">
                 <div class="mt-8">
                     <a href="{{'Tv/'. $show['id']}}">
-                        <img src={{'https://image.tmdb.org/t/p/w500/'.$show['poster_path']}} alt="The Tv Show Poster">
+                        <img src={{ $show['poster_path']}} alt="The Tv Show Poster">
                     </a>
                 </div>
                 <div class="mt-2">
@@ -26,11 +26,7 @@
                     <span> {{$show['first_air_date']}}</span>
                     </div>
                     <div class="text-gray text-sm">
-                        @foreach ($show['genre_ids'] as $item)
-                            {{$genres->get($item)}} @if (!$loop->last)
-                                ,
-                            @endif
-                        @endforeach
+                        {{$show['genre']}}
                     </div>
                 </div>
             </div>
@@ -45,11 +41,11 @@
             Popular Tv Series
         </h2>
         <div class="owl-carousel owl-theme mt-5">
-            @foreach ($topRatedTv as $show)
+            @foreach ($topRatedTV as $show)
             <div class="item">
                 <div class="mt-8">
                     <a href="{{'Tv/'. $show['id']}}">
-                        <img src={{'https://image.tmdb.org/t/p/w500/'.$show['poster_path']}} alt="The Tv Show Poster">
+                        <img src={{ $show['poster_path']}} alt="The Tv Show Poster">
                     </a>
                 </div>
                 <div class="mt-2">
@@ -63,11 +59,7 @@
                     <span> {{$show['first_air_date']}}</span>
                     </div>
                     <div class="text-gray text-sm">
-                        @foreach ($show['genre_ids'] as $item)
-                            {{$genres->get($item)}} @if (!$loop->last)
-                            ,
-                        @endif
-                        @endforeach
+                        {{$show['genre']}}
                     </div>
                 </div>
             </div>

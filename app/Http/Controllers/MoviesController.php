@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\ViewModels\MoviesViewModel;
+use App\ViewModels\MovieViewModel;
 
 class MoviesController extends Controller
 {
@@ -19,17 +21,14 @@ class MoviesController extends Controller
         $httpRequest = 'https://api.themoviedb.org/3/tv/on_the_air?api_key='.$suffix ;
         $popularTV =  Http::get($httpRequest)->json()['results'];
         $httpRequest = 'https://api.themoviedb.org/3/genre/tv/list?api_key='.$suffix ;
-        $genresList =  Http::get($httpRequest)->json()['genres'];
+        $genres =  Http::get($httpRequest)->json()['genres'];
 
-        $genres = collect($genresList)->mapWithKeys(function ($genre){
-            return [$genre['id'] => $genre['name']];
-        });
-        // dd($popularTV);
-        return view('index',
-            ['popularTV'=>$popularTV,
-            'topRatedTv' =>$topRatedTV,
-            'genres' => $genres,
-            ]);
+        $viewModel = new MoviesViewModel(
+            $popularTV,
+            $topRatedTV,
+            $genres,
+        );
+        return view('index', $viewModel);
     }
 
     /**
@@ -64,11 +63,12 @@ class MoviesController extends Controller
         $suffix = config('services.MovieDB.token');
         $httpRequest = 'https://api.themoviedb.org/3/tv/'.$id.'?api_key='.$suffix.'&append_to_response=credits,videos,images' ;
         $tvDetails = Http::get($httpRequest)->json();
-        // dd($tvDetails);
 
-        return view('show', [
-            'details' =>$tvDetails,
-        ]);
+        $viewModel = new MovieViewModel(
+            $tvDetails,
+        );
+
+        return view('show', $viewModel);
 
         //
     }
